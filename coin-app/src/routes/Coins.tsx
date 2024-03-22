@@ -84,8 +84,11 @@ function Coins() {
       </Header>
       {loading ? (<Loader>Loading...</Loader>) : (<CoinList>
         {coins.map((coin) => 
-        (<Coin key={coin.id}>
-          <Link to={`/${coin.id}`}>
+          (<Coin key={coin.id}>
+            <Link to={{ //Link도 object형식으로 쓸 수 있다.
+              pathname: `/${coin.id}`,
+              state: {name: coin.name},
+            }}>
             <CoinWrapper>
               <Img src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`} />
               {coin.name} &rarr;
