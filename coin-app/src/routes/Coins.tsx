@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+// import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { fetchCoins } from "../api";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -53,7 +55,7 @@ const CoinWrapper = styled.div`
 
 
 // 기존에 API를 참고하여 만든 interface
-interface CoinInterface {
+interface ICoin {
     id: string,
     name: string,
     symbol: string,
@@ -63,39 +65,40 @@ interface CoinInterface {
     type: string,
 }
 
-
 function Coins() {
-  const [coins, setCoins] = useState<CoinInterface[]>([]);
-  const [loading, setLoading] = useState(true); 
-  useEffect(() => {
-    (async() => {
-      const response = await fetch("https://api.coinpaprika.com/v1/coins");
-      const json = await response.json();
-      setCoins(json.slice(0, 100));
-      console.log(json);
-      setLoading(false);
-      // state 내부의 코인들이 모두 세팅 되면 loading은 false로 상태값 변경
-    })(); 
-  },[]);
+  // const [coins, setCoins] = useState<CoinInterface[]>([]);
+  // const [loading, setLoading] = useState(true); 
+  // useEffect(() => {
+  //   (async() => {
+  //     const response = await fetch("https://api.coinpaprika.com/v1/coins");
+  //     const json = await response.json();
+  //     setCoins(json.slice(0, 100));
+  //     console.log(json);
+  //     setLoading(false);
+  //     // state 내부의 코인들이 모두 세팅 되면 loading은 false로 상태값 변경
+  //   })(); 
+  // },[]);
+  const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
   return (
     <Container>
       <Header>
         <Title>코인</Title>
       </Header>
-      {loading ? (<Loader>Loading...</Loader>) : (<CoinList>
-        {coins.map((coin) => 
-          (<Coin key={coin.id}>
-            <Link to={{ //Link도 object형식으로 쓸 수 있다.
-              pathname: `/${coin.id}`,
-              state: {name: coin.name},
-            }}>
-            <CoinWrapper>
-              <Img src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`} />
-              {coin.name} &rarr;
-            </CoinWrapper>
-          </Link>
-        </Coin>))}
-      </CoinList>)}
+      {isLoading  ? (<Loader>Loading...</Loader>) : (
+        <CoinList>
+          {data?.slice(0, 100).map((coin) => (
+            <Coin key={coin.id}>
+              <Link to={{ //Link도 object형식으로 쓸 수 있다.
+                pathname: `/${coin.id}`,
+                state: {name: coin.name},
+              }}>
+              <CoinWrapper>
+                <Img src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`} />
+                {coin.name} &rarr;
+              </CoinWrapper>
+            </Link>
+          </Coin>))}
+        </CoinList>)}
     </Container>
   );
 }

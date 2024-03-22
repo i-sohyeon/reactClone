@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
-import { Switch, Route, useParams, useLocation } from "react-router";
 import styled from "styled-components";
 import Price from "./Price";
 import Chart from "./Chart";
+import { Switch, Route, useParams, useLocation } from "react-router";
+import { useEffect, useState } from "react";
+const [loading, setLoading] = useState(true);
 import { Link, useRouteMatch } from "react-router-dom";
+
 
 const Container = styled.div`
   padding: 0px 20px;
