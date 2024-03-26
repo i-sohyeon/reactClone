@@ -6,51 +6,56 @@ import { fetchCoins } from "../api";
 
 const Container = styled.div`
   padding: 0px 20px;
-  max-width: 400px;
-  margin: 0px auto;
+  max-width: 480px;
+  margin: 0 auto;
 `;
+
 const Header = styled.header`
-  height: 10vh;
+  height: 15vh;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
-const CoinList = styled.ul``;
+
+const CoinsList = styled.ul``;
+
 const Coin = styled.li`
-  background-color: white;
-  font-size: 24px;
-  color: ${(props) => props.theme.bgColor};
-  padding: 18px;
-  font-weight: 500;
+  background-color: ${(props) => props.theme.cardBgColor};
+  color: ${(props) => props.theme.textColor};
   border-radius: 15px;
   margin-bottom: 10px;
+  border: 1px solid white;
   a {
     display: flex;
     align-items: center;
-    transition: color 0.5s ease-in;
-    display: block;
+    padding: 20px;
+    transition: color 0.2s ease-in;
   }
   &:hover {
     a {
-      color:${(props) => props.theme.accentColor};
+      color: ${(props) => props.theme.accentColor};
     }
   }
 `;
+
 const Title = styled.h1`
   font-size: 48px;
-  color:${(props) => props.theme.accentColor};
+  color: ${(props) => props.theme.accentColor};
 `;
-const Loader = styled.div`
+
+const Loader = styled.span`
   text-align: center;
-  font: 16px;
-`
+  display: block;
+`;
+
 const Img = styled.img`
   width: 35px;
   height: 35px;
   margin-right: 10px;
-`
+`;
 const CoinWrapper = styled.div`
-  
+  display: flex;
+  align-items: center;
 `
 
 
@@ -85,7 +90,7 @@ function Coins() {
         <Title>코인</Title>
       </Header>
       {isLoading  ? (<Loader>Loading...</Loader>) : (
-        <CoinList>
+        <CoinsList>
           {data?.slice(0, 100).map((coin) => (
             <Coin key={coin.id}>
               <Link to={{ //Link도 object형식으로 쓸 수 있다.
@@ -98,7 +103,7 @@ function Coins() {
               </CoinWrapper>
             </Link>
           </Coin>))}
-        </CoinList>)}
+        </CoinsList>)}
     </Container>
   );
 }
