@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-// import { useEffect, useState } from "react";
+import { useState, useEffect  } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoins } from "../api";
@@ -67,7 +67,7 @@ interface ICoin {
 
 function Coins() {
   // const [coins, setCoins] = useState<CoinInterface[]>([]);
-  // const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true); 
   // useEffect(() => {
   //   (async() => {
   //     const response = await fetch("https://api.coinpaprika.com/v1/coins");
@@ -103,4 +103,4 @@ function Coins() {
   );
 }
 
-export default Coins;
+export default Coins; 
