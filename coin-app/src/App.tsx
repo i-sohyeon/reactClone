@@ -4,6 +4,8 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { ReactQueryDevtools } from "react-query/devtools";
 import { darkTheme, lightTheme } from './theme';
 import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { isDarkAtom } from './atoms';
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
@@ -68,15 +70,12 @@ const GlobalStyle = createGlobalStyle`
 `
 
 function App() {
-  const [isDark, setIsDark] = useState(false);
-  const toggleDark = () => setIsDark((current) => !current);
-  // isDark가 true면 false를 return하고, false면 true를 return
+  const isDark = useRecoilValue(isDarkAtom)
   return (
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-        {/* <button onClick={toggleDark}>Toggle Mode</button> */}
         <GlobalStyle />
-        <Router isDark={isDark} toggleDark={toggleDark} />
+        <Router />
         <ReactQueryDevtools initialIsOpen={true} />
       </ThemeProvider>
     </>

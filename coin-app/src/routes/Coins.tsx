@@ -3,6 +3,8 @@ import { useState, useEffect  } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoins } from "../api";
+import { useSetRecoilState } from "recoil";
+import { isDarkAtom } from "../atoms";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -71,12 +73,11 @@ interface ICoin {
 }
 
 interface ICoinsProps {
-  toggleDark: () => void;
 }
 
-function Coins({toggleDark}: ICoinsProps) {
-  // toggleDark는 object props안에 있고 type은 ICoinsprop
-  // const [coins, setCoins] = useState<CoinInterface[]>([]);
+function Coins() {
+  const setDarkAtom = useSetRecoilState(isDarkAtom);
+  const toggleDarkAtom = () => setDarkAtom((prev) => !prev)
   const [loading, setLoading] = useState(true); 
   // useEffect(() => {
   //   (async() => {
@@ -93,7 +94,7 @@ function Coins({toggleDark}: ICoinsProps) {
     <Container>
       <Header>
         <Title>코인</Title>
-        <button onClick={toggleDark}>Toggle Dark mode</button>
+        <button onClick={toggleDarkAtom}>Toggle Mode</button>
       </Header>
       {isLoading  ? (<Loader>Loading...</Loader>) : (
         <CoinsList>
