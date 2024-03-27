@@ -70,7 +70,12 @@ interface ICoin {
     type: string,
 }
 
-function Coins() {
+interface ICoinsProps {
+  toggleDark: () => void;
+}
+
+function Coins({toggleDark}: ICoinsProps) {
+  // toggleDark는 object props안에 있고 type은 ICoinsprop
   // const [coins, setCoins] = useState<CoinInterface[]>([]);
   const [loading, setLoading] = useState(true); 
   // useEffect(() => {
@@ -88,6 +93,7 @@ function Coins() {
     <Container>
       <Header>
         <Title>코인</Title>
+        <button onClick={toggleDark}>Toggle Dark mode</button>
       </Header>
       {isLoading  ? (<Loader>Loading...</Loader>) : (
         <CoinsList>
