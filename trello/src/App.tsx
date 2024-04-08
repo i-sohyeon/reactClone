@@ -1,15 +1,18 @@
 import React from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { hourSelector, minuteState } from './atoms';
-// useRecoilState는 atom의 값에 더해서 atom을 수정할 함수까지 준다
+// useRecoilState는 atom의 값에 더해서 atom을 수정할 함수를 전달
 
 function App() {
   const [minutes, setMinutes] = useRecoilState(minuteState);
-  const hours = useRecoilValue(hourSelector);
+  const [hours, setHours] = useRecoilState(hourSelector);
   const onMinutesChange = (event:React.FormEvent<HTMLInputElement>) => {
     setMinutes(+event.currentTarget.value);
     // +를 앞에 붙이면 string을 number로 바꿔준다.
 
+  };
+  const onHoursChange = (event: React.FormEvent<HTMLInputElement>) => {
+    setHours(+event.currentTarget.value);
   }
   return (
     <div>
@@ -20,7 +23,12 @@ function App() {
         type="number"
         placeholder='Minutes'
       />
-      <input value={hours} type="number" placeholder='Hours'/>
+      <input
+        value={hours}
+        onChange={onHoursChange}
+        type="number"
+        placeholder='Hours'
+      />
     </div>
   );
 }
