@@ -105,3 +105,16 @@ form에 많은 state를 등록해야함
 사용하기 위해선 useForm 이라는 hook을 import해야한다.
 
 useForm 작업할 땐, handle submit 받아오기
+
+
+# react-beatiful-dnd
+npm i react-beautiful-dnd
+npm i --save-dev @types/react-beautiful-dnd
+드래그앤 드롭 라이브러리
+
+DragDropContext는 앱 전체에 적용
+
+Droppable 드롭할 수 있는 영역
+  -Id가 반드시 필요
+  -children 필요 (childeren은 함수여야한다.)
+Draggable 드래그 할 수 있는 영역
