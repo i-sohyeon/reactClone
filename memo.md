@@ -118,3 +118,14 @@ Droppable 드롭할 수 있는 영역
   -Id가 반드시 필요
   -children 필요 (childeren은 함수여야한다.)
 Draggable 드래그 할 수 있는 영역
+
+#splice
+  - array를 재정렬 하도록 도와준다.
+
+  const x= ["a","b","c","d","e","f","g"]
+  x.splice(0, 1); //0번째 부터 1개 삭제한다.
+  => const x= ["b","c","d","e","f","g"]
+  
+  const x= ["b","c","d","e","f","g"]
+  x.splice(3, 0, "a") //3번째부터 0개 삭제하고 "a"를 추가한다.
+  => const x= ["b","c","d", "a", "e","f","g"]
