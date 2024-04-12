@@ -132,3 +132,5 @@ Draggable 드래그 할 수 있는 영역
 
 # react.memo 해당 컴포넌트는 렌더링하지 말라고 하는 역할
 =>react에서 component의 state가 변하면 해당 component의 모든 children은 다시 렌더링 됨
+
+# .map은 object가 아닌 array에서만 사용 가능
