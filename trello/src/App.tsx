@@ -3,6 +3,7 @@ import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautif
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { toDoState } from './atoms';
+import DragabbleCard from './Components/DragabbleCard';
 
 const Wrapper = styled.div`
   display: flex;
@@ -24,11 +25,6 @@ const Board =  styled.div`
   border-radius: 5px;
   background: ${(props) => props.theme.boardColor};
   min-height: 180px;
-`
-const Card =  styled.div`
-  border-radius: 5px;
-  margin-bottom: 10px;
-  background: ${(props) => props.theme.cardColor};
 `
 const toDos = ["a","b","c","d","e","f","g"]
 
@@ -55,19 +51,7 @@ function App() {
             {(magic) => (
               <Board ref={magic.innerRef } {...magic.droppableProps}>
                 {toDos.map((toDo, index) => (
-                  <Draggable key={toDo} draggableId={toDo} index={index}>
-                    {/* dnd를 사용할 때, key와 draggabledId는 무조건 같아야한다. */}
-                    {(magic) => (
-                    <Card 
-                      ref={magic.innerRef}
-                      {...magic.draggableProps}
-                      {...magic.dragHandleProps}
-                    >
-                      <span {...magic.dragHandleProps}>⭐</span>
-                      {toDo}
-                    </Card>
-                  )}
-                </Draggable>
+                  <DragabbleCard key={toDo} index={index} toDo={toDo} />
                 ))}
                 {magic.placeholder}
                 {/* 카드 dragndrop을 실행할때 배경카드의 높이가 변하지 않게 해줌 */}

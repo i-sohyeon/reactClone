@@ -129,3 +129,6 @@ Draggable 드래그 할 수 있는 영역
   const x= ["b","c","d","e","f","g"]
   x.splice(3, 0, "a") //3번째부터 0개 삭제하고 "a"를 추가한다.
   => const x= ["b","c","d", "a", "e","f","g"]
+
+# react.memo 해당 컴포넌트는 렌더링하지 말라고 하는 역할
+=>react에서 component의 state가 변하면 해당 component의 모든 children은 다시 렌더링 됨
